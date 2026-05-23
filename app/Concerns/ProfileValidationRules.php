@@ -18,7 +18,7 @@ trait ProfileValidationRules
             'firstname' => ['required', 'string', 'max:255'],
             'middlename' => ['nullable', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:40'],
+            'phone' => ['required', 'string', 'max:13'],
             'email' => $this->emailRules($userId),
         ];
     }
