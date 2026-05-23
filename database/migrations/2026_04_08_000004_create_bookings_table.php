@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->decimal('total_price', 12, 2);
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->foreignId('event_id')->constrained()->cascadeOnDelete();
             $table->foreignId('vendor_package_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
-            $table->decimal('total_price', 12, 2);
             $table->timestampsTz();
         });
     }

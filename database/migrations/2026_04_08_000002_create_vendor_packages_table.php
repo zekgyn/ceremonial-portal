@@ -9,12 +9,12 @@ return new class extends Migration {
     {
         Schema::create('vendor_packages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendor_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 12, 2);
             $table->unsignedInteger('guest_limit')->nullable();
             $table->json('metadata')->nullable();
+            $table->foreignId('vendor_id')->constrained('vendors')->nullOnDelete();
             $table->timestampsTz();
         });
     }

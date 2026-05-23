@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('business_name');
             $table->text('description')->nullable();
             $table->enum('category', ['catering', 'venue_decoration', 'entertainment_media']);
             $table->string('location');
             $table->boolean('verified')->default(false);
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
         });
     }
