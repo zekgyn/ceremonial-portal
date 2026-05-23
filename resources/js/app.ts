@@ -11,18 +11,19 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
         switch (true) {
-            case name === 'Welcome':
+            case name === 'Landing':
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
                 return [AppLayout, SettingsLayout];
             default:
-                return AppLayout;
+                // return AppLayout;
+                return null;
         }
     },
     progress: {
-        color: '#4B5563',
+        color: '#b5906b',
     },
 });
 
