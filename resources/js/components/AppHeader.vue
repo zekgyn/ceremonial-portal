@@ -50,6 +50,8 @@ const page = usePage();
 const auth = computed(() => page.props.auth);
 const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
 
+const userFullName = (u: any) => `${u?.firstname ?? ''} ${u?.middlename ?? ''} ${u?.lastname ?? ''}`.replace(/\s+/g, ' ').trim();
+
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
 
@@ -91,7 +93,7 @@ const rightNavItems: NavItem[] = [
                                 <Menu class="h-5 w-5" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left" class="w-[300px] p-6">
+                        <SheetContent side="left" class="w-75 p-6">
                             <SheetTitle class="sr-only"
                                 >Navigation menu</SheetTitle
                             >
@@ -248,15 +250,9 @@ const rightNavItems: NavItem[] = [
                                 <Avatar
                                     class="size-8 overflow-hidden rounded-full"
                                 >
-                                    <AvatarImage
-                                        v-if="auth.user.avatar"
-                                        :src="auth.user.avatar"
-                                        :alt="auth.user.name"
-                                    />
-                                    <AvatarFallback
-                                        class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ getInitials(auth.user?.name) }}
+                                    <AvatarImage v-if="auth.user.avatar" :src="auth.user.avatar" :alt="userFullName(auth.user)" />
+                                    <AvatarFallback class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white">
+                                        {{ getInitials(userFullName(auth.user)) }}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>
