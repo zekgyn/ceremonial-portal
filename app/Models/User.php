@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
-#[Fillable(['firstname', 'middlename', 'lastname', 'email', 'phone', 'role', 'password'])]
+#[Fillable(['name', 'email', 'phone', 'role', 'password','city'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -32,12 +32,6 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
-    }
-    public function getFullNameAttribute(): string
-    {
-        return collect([$this->firstname, $this->middlename, $this->lastname])
-            ->filter()
-            ->implode(' ');
     }
 
     public function isAdmin(): bool

@@ -1,6 +1,6 @@
-<script setup>
-import AppLayout from '@/layouts/AppLayout.vue'
+<script lang="ts" setup>
 import { Link, router } from '@inertiajs/vue3'
+import AppLayout from '@/layouts/AppLayout.vue'
 
 defineProps({
   stats: Object,
@@ -12,7 +12,7 @@ function formatPrice(n) {
 }
 
 function toggleVerify(id) {
-  router.patch(route('admin.vendors.verify', id))
+//   router.patch(route('admin.vendors.verify', id))
 }
 
 const categoryLabels = {
@@ -60,7 +60,9 @@ const categoryLabels = {
     <!-- Vendor management -->
     <div class="mb-5 flex items-center justify-between">
       <h2 class="font-display text-2xl text-stone-900">Vendors</h2>
-      <Link :href="route('admin.vendors.index')" class="text-sm text-[#b5906b] hover:text-[#8c6a47]">
+            <!-- route('admin.vendors.index') -->
+
+      <Link href="/" class="text-sm text-[#b5906b] hover:text-[#8c6a47]">
         View all →
       </Link>
     </div>

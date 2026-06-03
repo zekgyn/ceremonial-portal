@@ -1,6 +1,6 @@
-<script setup>
-import AppLayout from '@/layouts/AppLayout.vue'
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
+import AppLayout from '@/layouts/AppLayout.vue'
 
 const props = defineProps({
   events: Array,
@@ -31,7 +31,8 @@ const eventTypeEmoji = {
         <h1 class="font-display text-4xl text-stone-900">Dashboard</h1>
         <p class="text-stone-500 mt-1">Good to see you. Here's what's happening.</p>
       </div>
-      <Link :href="route('events.create')" class="btn-primary shrink-0">
+      <!-- route('events.create') -->
+      <Link href="/" class="btn-primary shrink-0">
         + New Event
       </Link>
     </div>
@@ -55,17 +56,20 @@ const eventTypeEmoji = {
     <!-- Recent events -->
     <div class="mb-6 flex items-center justify-between">
       <h2 class="font-display text-2xl text-stone-900">Recent Events</h2>
-      <Link :href="route('events.index')" class="text-sm text-[#b5906b] hover:text-[#8c6a47]">View all →</Link>
+      <!-- route('events.index') -->
+      <Link href="/" class="text-sm text-[#b5906b] hover:text-[#8c6a47]">View all →</Link>
     </div>
 
     <div v-if="!events.length" class="card p-12 text-center text-stone-400">
       <p class="font-display text-2xl mb-2">No events yet</p>
       <p class="text-sm mb-5">Start planning your first ceremony.</p>
-      <Link :href="route('events.create')" class="btn-primary">Plan an Event →</Link>
+      <!-- route('events.create') -->
+      <Link href="/" class="btn-primary">Plan an Event →</Link>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <Link v-for="event in events" :key="event.id" :href="route('events.show', event.id)"
+        <!-- route('events.show', event.id) -->
+      <Link v-for="event in events" :key="event.id" href="/"
             class="card p-5 flex flex-col gap-3 hover:shadow-md hover:border-stone-200 transition-all duration-200 group">
         <div class="flex items-center justify-between">
           <span class="text-2xl">{{ eventTypeEmoji[event.type] ?? '✦' }}</span>
@@ -90,7 +94,8 @@ const eventTypeEmoji = {
       </Link>
 
       <!-- Add new card -->
-      <Link :href="route('events.create')"
+       <!-- route('events.create') -->
+      <Link href="/"
             class="card p-5 border-dashed flex flex-col items-center justify-center gap-2 text-stone-400 hover:text-[#b5906b] hover:border-[#b5906b]/40 transition-all duration-200 min-h-[160px]">
         <span class="text-3xl font-light">+</span>
         <span class="text-sm">New Event</span>
@@ -101,17 +106,20 @@ const eventTypeEmoji = {
     <div class="mt-10">
       <h2 class="font-display text-2xl text-stone-900 mb-4">Explore Vendors</h2>
       <div class="grid grid-cols-3 gap-4">
-        <Link :href="route('vendors.index', { category: 'catering' })"
+        <!-- route('vendors.index', { category: 'catering' }) -->
+        <Link href="/"
               class="card p-4 flex items-center gap-3 hover:shadow-md hover:border-stone-200 transition-all">
           <span class="text-2xl">🍽</span>
           <span class="font-medium text-stone-700">Catering</span>
         </Link>
-        <Link :href="route('vendors.index', { category: 'venue_decoration' })"
+        <!-- route('vendors.index', { category: 'venue_decoration' }) -->
+        <Link href="/"
               class="card p-4 flex items-center gap-3 hover:shadow-md hover:border-stone-200 transition-all">
           <span class="text-2xl">🌸</span>
           <span class="font-medium text-stone-700">Venue & Décor</span>
         </Link>
-        <Link :href="route('vendors.index', { category: 'entertainment_media' })"
+        <!-- route('vendors.index', { category: 'entertainment_media' }) -->
+        <Link href="/"
               class="card p-4 flex items-center gap-3 hover:shadow-md hover:border-stone-200 transition-all">
           <span class="text-2xl">🎵</span>
           <span class="font-medium text-stone-700">Entertainment</span>
