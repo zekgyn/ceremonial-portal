@@ -84,7 +84,7 @@
 
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Sparkles } from "lucide-vue-next";
+import { Sparkles } from "@lucide/vue";
 import InputError from '@/components/InputError.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 import TextLink from '@/components/TextLink.vue';

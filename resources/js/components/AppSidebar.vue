@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import { Building2, Users2, LayoutGrid, List, Balloon } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import {
@@ -14,29 +13,83 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { dashboard as adminDashboard } from '@/routes/admin';
+import { index as adminBookings } from '@/routes/admin/bookings';
+import { index as adminEvents } from '@/routes/admin/events';
+import { index as adminVendors } from '@/routes/admin/vendors';
+import { index as clientBookings } from '@/routes/client/bookings';
+import { index as clientVendors } from '@/routes/client/vendors';
+import { dashboard as vendorDashboard } from '@/routes/vendor';
+import { index as vendorBookings } from '@/routes/vendor/bookings';
+import { index as vendorPackages } from '@/routes/vendor/packages';
 import type { NavItem } from '@/types';
+import { index as adminClients } from '@/routes/admin/clients';
+import { dashboard as clientDashboard } from '@/routes/client';
+// import { index as events } from '@/routes/client/events'
 
-const mainNavItems: NavItem[] = [
+const adminNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
+        title: 'Overview',
+        href: adminDashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Vendors',
+        href: adminVendors(),
+        icon: Building2,
+    },
+    {
+        title: 'Clients',
+        href: adminClients(),
+        icon: Users2,
+    },
+    {
+        title: 'Bookings',
+        href: adminBookings(),
+        icon: List,
+    },
+    {
+        title: 'Events',
+        href: adminEvents(),
+        icon: Balloon,
+    }
+];
+const vendorNavItems: NavItem[] = [
+    {
+        title: 'Overview',
+        href: vendorDashboard(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Packages',
+        href: vendorPackages(),
+        icon: Building2,
+    },
+    {
+        title: 'Bookings',
+        href: vendorBookings(),
+        icon: List,
+    }
+];
+const clientNavItems: NavItem[] = [
+    {
+        title: 'Overview',
+        href: clientDashboard(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Vendors',
+        href: clientVendors(),
+        icon: Building2,
+    },
+    {
+        title: 'Bookings',
+        href: clientBookings(),
+        icon: Balloon,
+    }
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+const { user } = usePage().props.auth
 </script>
 
 <template>
@@ -45,7 +98,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
+                        <Link href="/">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
@@ -54,11 +107,12 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain v-if="user.role === 'admin'" :items="adminNavItems" />
+            <NavMain v-if="user.role === 'vendor'" :items="vendorNavItems" />
+            <NavMain v-if="user.role === 'client'" :items="clientNavItems" />
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>

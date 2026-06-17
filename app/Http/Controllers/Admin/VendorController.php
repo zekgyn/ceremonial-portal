@@ -12,7 +12,7 @@ class VendorController extends Controller
     {
         abort_unless(request()->user()->isAdmin(), 403);
 
-        $vendors = Vendor::with('user:id,firstname,lastname,email')
+        $vendors = Vendor::with('owner:id,name,email')
             ->withCount(['packages', 'bookings'])
             ->latest()
             ->paginate(20);

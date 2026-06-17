@@ -1,15 +1,21 @@
 export type User = {
     id: number;
-    firstname?: string;
-    middlename: string;
-    lastname: string;
-    role: string;
+    name: string;
     phone: string;
     email: string;
+    role: string;
     avatar?: string;
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;
+    vendor: {
+        id: number;
+        business_name: string;
+        description: string;
+        category: 'venue_decoration'|'media_intertainment'|'food_drinks';
+        location: string;
+        verified: boolean;
+    };
     [key: string]: unknown;
 };
 

@@ -8,7 +8,8 @@
             <div class="max-w-md w-full mx-auto">
 
                 <div class="flex items-center gap-2 mb-8">
-                    <div class="size-9 rounded-xl bg-linear-to-br from-rose-500 to-amber-500 flex items-center justify-center">
+                    <div
+                        class="size-9 rounded-xl bg-linear-to-br from-rose-500 to-amber-500 flex items-center justify-center">
                         <Sparkles class="size-5 text-white" />
                     </div>
                     <span class="text-rose-900 font-bold text-[1.2rem]">CeremoniQ</span>
@@ -72,8 +73,8 @@
                     <div class="space-y-4">
                         <div>
                             <Label class="block text-gray-700 text-sm mb-1.5">Full name</Label>
-                            <Input id="name" type="text" autofocus :tabindex="1" required autocomplete="name" name="name"
-                                placeholder="Full name" />
+                            <Input id="name" type="text" autofocus :tabindex="1" required autocomplete="name"
+                                name="name" placeholder="Full name" />
                             <InputError :message="errors.name" />
                         </div>
                         <div>
@@ -111,20 +112,22 @@
                     <div v-if="usertype === 'vendor'" class="flex flex-col gap-4">
                         <div>
                             <Label class="block text-gray-700 text-sm mb-1.5">Business Name</Label>
-                            <Input type="text" name="business" placeholder="Your business name" />
+                            <Input type="text" name="business_name" placeholder="Your business name" />
                         </div>
                         <div>
                             <Label class="block text-gray-700 text-sm mb-1.5">Vendor Category</Label>
                             <select name="category" class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900
                                     outline-none focus:border-rose-400 focus:bg-white transition-colors text-sm">
                                 <option value="">Select a category</option>
-                                <option v-for="c in vendorCategories" :key="c" :value="c">{{ c }}</option>
+                                <option v-for="c in vendorCategories" :key="c.values" :value="c.values">{{ c.label }}
+                                </option>
                             </select>
                         </div>
                         <div>
                             <Label class="block text-gray-700 text-sm mb-1.5">Brief Description</Label>
                             <textarea name="description" placeholder="Tell clients about your services..." rows="3"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-400 outline-none focus:border-rose-400 focus:bg-white transition-colors text-sm resize-none" />
+                            <InputError :message="errors.description" />
                         </div>
                     </div>
                     <!-- Vendor Input End -->
@@ -139,7 +142,7 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <Button type="submit"
+                        <Button type="submit" :disabled="processing"
                             class="flex-1 py-3 bg-linear-to-r from-rose-500 to-amber-500 text-white rounded-xl hover:opacity-90 disabled:opacity-60 transition-all flex items-center justify-center gap-2 font-semibold">
                             <template v-if="processing">
                                 <Spinner
@@ -187,7 +190,7 @@
 
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { Sparkles, CheckCircle, User, Building2 } from 'lucide-vue-next';
+import { Sparkles, CheckCircle, User, Building2 } from '@lucide/vue';
 import { ref } from 'vue';
 import InputError from '@/components/InputError.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
@@ -205,7 +208,11 @@ const usertype = ref<string>('client')
 const AUTH_BG =
     "https://images.unsplash.com/photo-1767986012138-4893f40932d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwY2VyZW1vbnklMjBlbGVnYW50JTIwdmVudWV8ZW58MXx8fHwxNzc5Mjg2MjIzfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
-const vendorCategories = ["Catering", "Venue & Decoration", "Entertainment & Media"];
+const vendorCategories = [
+    { label: "Catering", values: "catering" },
+    { label: "Venue & Decoration", values: "venue_decoration" },
+    { label: "Entertainment & Media", values: "entertainment_media" }
+];
 
 const perks = {
     client: ["Free event dashboard", "Unlimited vendor browsing", "Budget & timeline tools", "Booking management"],

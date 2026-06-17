@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
+        // abort_unless(request()->user()->isCLient(), 403);
         $user = request()->user();
 
         $events = $user->events()

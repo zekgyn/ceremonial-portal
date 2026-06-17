@@ -3,10 +3,10 @@
 import { Star, Eye, CheckCircle } from '@lucide/vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 import { dashboard } from '@/routes/admin';
-import { index as vendorIndex} from '@/routes/admin/vendors';
+import { index } from '@/routes/admin/clients';
 // import { verify } from '@/routes/admin/vendors';
 
-defineProps({ vendors: Object })
+defineProps({ clients: Object })
 
 defineOptions({
     layout: {
@@ -17,7 +17,7 @@ defineOptions({
             },
             {
                 title: 'Vendors',
-                href: vendorIndex(),
+                href: index(),
             },
         ],
     },
@@ -43,9 +43,8 @@ const vendorz = [
         <div class="min-h-screen bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="space-y-5">
-                    {{ vendors }}
                     <div class="flex items-center justify-between gap-4 flex-wrap">
-                        <h2 class="text-gray-900">All Vendors ({{vendors?.length}})</h2>
+                        <h2 class="text-gray-900">All Clients ({{ clients?.length}})</h2>
                         <div class="flex gap-2 flex-wrap">
                             <!-- {["All", "Active", "Pending", "Under Review"].map((f) => (
                             <button key={f} onClick={()=> setVendorFilter(f)}

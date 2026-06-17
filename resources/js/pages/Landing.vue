@@ -4,7 +4,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <Link>
-                        <button  class="cursor-pointer flex items-center gap-2">
+                        <button class="cursor-pointer flex items-center gap-2">
                             <div
                                 class="size-8 rounded-lg bg-linear-to-br from-rose-500 to-amber-500 flex items-center justify-center">
                                 <Sparkles class="size-4 text-white" />
@@ -15,8 +15,9 @@
 
                     <div class="hidden md:flex items-center gap-8">
                         <Link href="/">
-                            <button class="cursor-pointer text-sm transition-colors text-gray-600 hover:text-rose-600" :class="[
-                                'marketplace' !== 'marketplace' && 'text-rose-600']">
+                            <button class="cursor-pointer text-sm transition-colors text-gray-600 hover:text-rose-600"
+                                :class="[
+                                    'marketplace' !== 'marketplace' && 'text-rose-600']">
                                 Marketplace
                             </button>
                         </Link>
@@ -24,16 +25,16 @@
 
                     <div class="hidden md:flex items-center gap-3">
                         <Link :href="login()">
-                            <Button
+                            <button
                                 class="cursor-pointer px-4 py-2 text-sm text-rose-600 border border-rose-200 rounded-full hover:bg-rose-50 transition-colors">
                                 Sign In
-                            </Button>
+                            </button>
                         </Link>
                         <Link :href="register()">
-                            <Button
+                            <button
                                 class="cursor-pointer px-4 py-2 text-sm text-white bg-linear-to-r from-rose-500 to-amber-500 rounded-full hover:opacity-90 transition-opacity">
                                 Get Started
-                            </Button>
+                            </button>
                         </Link>
                     </div>
 
@@ -68,7 +69,8 @@
         <div class="min-h-screen bg-white">
             <!-- {/* Hero */} -->
             <section class="relative min-h-[92vh] flex items-center overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1769812344142-00c7f6584885')]" />
+                <div
+                    class="absolute inset-0 bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1769812344142-00c7f6584885')]" />
                 <div class="absolute inset-0 bg-linear-to-r from-rose-950/85 via-rose-900/70 to-transparent" />
                 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
                     <div class="max-w-2xl">
@@ -150,20 +152,18 @@
                                         <component :is='cat.icon'></component>
                                     </div>
                                     <div class="absolute bottom-4 left-4 right-4">
-                                        <span class="text-white/80 text-xs bg-black/30 px-2 py-1 rounded-full">{{ cat.count
-                                        }}</span>
+                                        <span class="text-white/80 text-xs bg-black/30 px-2 py-1 rounded-full">{{
+                                            cat.count
+                                            }}</span>
                                     </div>
                                 </div>
                                 <div class="p-6">
-                                    <h3 class="text-gray-900 mb-2">{{cat.title}}</h3>
-                                    <p class="text-gray-500 text-sm leading-relaxed">{{cat.description}}</p>
-                                    <Link>
-                                        <Button
-                                            :class="`mt-4 flex items-center gap-1.5 text-sm bg-linear-to-r ${cat.color} bg-clip-text text-transparent font-semibold`">
+                                    <h3 class="text-gray-900 mb-2">{{ cat.title }}</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed">{{ cat.description }}</p>
+                                        <Button :class="`mt-4 flex items-center gap-1.5 text-sm bg-linear-to-r ${cat.color} bg-clip-text text-transparent font-semibold`">
                                             Explore
                                             <ArrowRight class="size-4 text-amber-500" />
                                         </Button>
-                                    </Link>
                                 </div>
                             </Link>
                         </div>
@@ -216,7 +216,7 @@
                             <div class="grid grid-cols-1 gap-3">
                                 <div v-for="f in features" :key="f" class="flex items-center gap-3">
                                     <CheckCircle class="size-5 text-amber-400 shrink-0" />
-                                    <span class="text-rose-100 text-sm">{{f}}</span>
+                                    <span class="text-rose-100 text-sm">{{ f }}</span>
                                 </div>
                             </div>
                             <button
@@ -255,7 +255,7 @@
                             hover:opacity-90 shadow-lg font-semibold">
                             I'm Planning an Event
                         </Button>
-                        <Button
+                        <Button variant="outline"
                             class="px-8 py-4 border-2 border-rose-300 text-rose-600 rounded-full hover:bg-rose-50 font-semibold">
                             I'm a Vendor
                         </Button>
@@ -304,8 +304,8 @@
 </template>
 
 <script setup lang="ts">
-    import { Link } from '@inertiajs/vue3';
-import { Calendar, Users, ChefHat, MapPin, Utensils, Building2, Music, Sparkles, Star, X, Menu, ArrowRight, CheckCircle } from 'lucide-vue-next';
+import { Link } from '@inertiajs/vue3';
+import { Calendar, Users, ChefHat, MapPin, Utensils, Building2, Music, Sparkles, Star, X, Menu, ArrowRight, CheckCircle } from '@lucide/vue';
 import { Button } from '@/components/ui/button'
 import { login, register } from '@/routes';
 import vendor from '@/routes/vendor'

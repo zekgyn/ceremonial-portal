@@ -51,29 +51,17 @@ const user = computed(() => page.props.auth.user);
             v-slot="{ errors, processing }"
         >
             <div class="grid gap-2">
-                <Label for="firstname">First Name</Label>
+                <Label for="name">Full Name</Label>
                 <Input
-                    id="firstname"
+                    id="name"
                     class="mt-1 block w-full"
-                    name="firstname"
-                    :default-value="user.firstname"
+                    name="name"
+                    :default-value="user.name"
                     required
-                    autocomplete="firstname"
-                    placeholder="First name"
+                    autocomplete="name"
+                    placeholder="Name"
                 />
-                <InputError class="mt-2" :message="errors.firstname" />
-            </div>
-            <div class="grid gap-2">
-                <Label for="middlename">Middle Name</Label>
-                <Input id="middlename" class="mt-1 block w-full" name="middlename" :default-value="user.middlename" required
-                    autocomplete="middlename" placeholder="Middle name" />
-                <InputError class="mt-2" :message="errors.middlename" />
-            </div>
-            <div class="grid gap-2">
-                <Label for="lastname">Last Name</Label>
-                <Input id="lastname" class="mt-1 block w-full" name="lastname" :default-value="user.lastname"
-                    required autocomplete="lastname" placeholder="Last name" />
-                <InputError class="mt-2" :message="errors.lastname" />
+                <InputError class="mt-2" :message="errors.name" />
             </div>
 
             <div class="grid gap-2">
