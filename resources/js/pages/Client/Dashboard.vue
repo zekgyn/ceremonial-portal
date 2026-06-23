@@ -2,10 +2,10 @@
 import { usePage } from '@inertiajs/vue3'
 import { DollarSign, CheckCircle, Users, Plus, Calendar, MapPin, Clock } from '@lucide/vue';
 
-// const props = defineProps({
-//   events: Array,
-//   stats: Object,
-// })
+defineProps({
+    events: Array,
+    //   stats: Object,
+})
 const { user } = usePage().props.auth
 
 const bookedVendors = [
@@ -58,59 +58,79 @@ const stats = [
 
 <template>
 
-        <main class="min-h-screen bg-gray-50">
-            <!-- {/* Header */} -->
-            <div class="bg-linear-to-r from-rose-800 to-rose-600 py-10 px-4">
-                <div class="max-w-7xl mx-auto">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <div>
-                            <p class="text-rose-300 text-sm mb-1">Welcome back, {{user.name.split(" ")[0] || 'Client'}} ✨</p>
-                            <h1 class="text-white font-bold text-[1.75rem]">
-                                Amara & David's Wedding
-                            </h1>
-                            <div class="flex items-center gap-3 mt-2 flex-wrap">
-                                <div class="flex items-center gap-1.5 text-rose-200 text-sm">
-                                    <Calendar class="size-4" />
-                                    June 14, 2026
-                                </div>
-                                <div class="flex items-center gap-1.5 text-rose-200 text-sm">
-                                    <MapPin class="size-4" />
-                                    Ivory Palace, Lagos
-                                </div>
-                                <div class="flex items-center gap-1.5 text-rose-200 text-sm">
-                                    <Users class="size-4" />
-                                    250 Guests
-                                </div>
+    <main class="min-h-screen bg-gray-50">
+        <!-- {/* Header */} -->
+        <div class="bg-linear-to-r from-rose-800 to-rose-600 py-10 px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-rose-300 text-sm mb-1">Welcome back, {{ user.name.split(" ")[0] || 'Client' }} ✨
+                        </p>
+                        <h1 v-if="events?.length !== 0" class="text-white font-bold text-[1.75rem]">
+                            Amara & David's Wedding
+                        </h1>
+                        <h1 v-else class="text-white font-bold text-[1.75rem]">
+                            Create an event to start Planning
+                        </h1>
+                        <div v-if="events?.length !== 0" class="flex items-center gap-3 mt-2 flex-wrap">
+                            <div class="flex items-center gap-1.5 text-rose-200 text-sm">
+                                <Calendar class="size-4" />
+                                June 14, 2026
+                            </div>
+                            <div class="flex items-center gap-1.5 text-rose-200 text-sm">
+                                <MapPin class="size-4" />
+                                Ivory Palace, Lagos
+                            </div>
+                            <div class="flex items-center gap-1.5 text-rose-200 text-sm">
+                                <Users class="size-4" />
+                                250 Guests
                             </div>
                         </div>
-                        <button class="flex items-center gap-2 px-5 py-2.5 bg-white/10 border border-white/30 text-white
+                    </div>
+
+                    <Dialog>
+                        <DialogTrigger>
+                            <button v-if="events?.length === 0" class="flex items-center gap-2 px-5 py-2.5 bg-white/10 border border-white/30 text-white
                             rounded-xl hover:bg-white/20 transition-colors text-sm">
-                            <Plus class="size-4" />
-                            Add Vendor
-                        </button>
-                    </div>
+                                <Plus class="size-4" />
+                                Create Event
+                            </button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                                <DialogDescription>
+                                    This action cannot be undone. This will permanently delete your account
+                                    and remove your data from our servers.
+                                </DialogDescription>
+                            </DialogHeader>
+                        </DialogContent>
+                    </Dialog>
 
-                    <!-- {/* Stats */} -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+                </div>
 
-                        <div v-for="stat in stats" :key="stat.label"
-                            class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                            <div
-                                :class="[`size-9 rounded-xl bg-linear-to-br ${stat.color} flex items-center justify-center text-white mb-2`]">
-                                <component :is="stat.icon" :size="20" />
-                            </div>
-                            <div class="text-white font-bold text-[1.4rem]">{{ stat.value }}
-                            </div>
-                            <div class="text-rose-300 text-xs mt-0.5">{{ stat.label }}</div>
+                <!-- {/* Stats */} -->
+                <div v-if="events?.length !== 0" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+
+                    <div v-for="stat in stats" :key="stat.label"
+                        class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                        <div
+                            :class="[`size-9 rounded-xl bg-linear-to-br ${stat.color} flex items-center justify-center text-white mb-2`]">
+                            <component :is="stat.icon" :size="20" />
                         </div>
-
+                        <div class="text-white font-bold text-[1.4rem]">{{ stat.value }}
+                        </div>
+                        <div class="text-rose-300 text-xs mt-0.5">{{ stat.label }}</div>
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- {/* Tabs */} -->
-                <!-- <div
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+            <!-- {/* Tabs */} -->
+            <!-- <div
                     class="flex gap-1 bg-white border border-gray-200 p-1.5 rounded-2xl w-fit mb-8 shadow-sm overflow-x-auto">
                     {tabs.map((tab) => (
                     <button key={tab.id} onClick={()=> setActiveTab(tab.id)}
@@ -130,7 +150,7 @@ const stats = [
 
 
 
-                <!-- {/* Budget */}
+            <!-- {/* Budget */}
                 {activeTab === "budget" && (
                 <div class="grid lg:grid-cols-2 gap-6">
                     <div class="bg-white rounded-2xl p-6 shadow-sm">
@@ -243,7 +263,7 @@ const stats = [
                     </div>
                 </div>
                 )} -->
-            </div>
-        </main>
+        </div>
+    </main>
 
 </template>

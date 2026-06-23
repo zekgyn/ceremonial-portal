@@ -15,16 +15,16 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard as adminDashboard } from '@/routes/admin';
 import { index as adminBookings } from '@/routes/admin/bookings';
+import { index as adminClients } from '@/routes/admin/clients';
 import { index as adminEvents } from '@/routes/admin/events';
 import { index as adminVendors } from '@/routes/admin/vendors';
+import { dashboard as clientDashboard } from '@/routes/client';
 import { index as clientBookings } from '@/routes/client/bookings';
 import { index as clientVendors } from '@/routes/client/vendors';
 import { dashboard as vendorDashboard } from '@/routes/vendor';
 import { index as vendorBookings } from '@/routes/vendor/bookings';
 import { index as vendorPackages } from '@/routes/vendor/packages';
 import type { NavItem } from '@/types';
-import { index as adminClients } from '@/routes/admin/clients';
-import { dashboard as clientDashboard } from '@/routes/client';
 // import { index as events } from '@/routes/client/events'
 
 const adminNavItems: NavItem[] = [

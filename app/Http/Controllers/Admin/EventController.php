@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = request()->user()->events()
+        $events = Event::query()
             ->withCount('bookings')
             ->with(['bookings.vendorPackage.vendor'])
             ->latest()
@@ -28,7 +28,7 @@ class EventController extends Controller
                 'total_cost'    => $event->total_cost,
             ]);
 
-        return Inertia::render('Client/Events/Index', compact('events'));
+        return Inertia::render('Admin/Events', compact('events'));
     }
 
     public function create()

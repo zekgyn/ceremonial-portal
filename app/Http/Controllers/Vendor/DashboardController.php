@@ -22,14 +22,13 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        $stats = [
+        $stat = [
             'total_packages'  => $vendor->packages()->count(),
-            'total_bookings'  => $vendor->bookings()->count(),
             'pending'         => $vendor->bookings()->where('status', 'pending')->count(),
             'confirmed'       => $vendor->bookings()->where('status', 'confirmed')->count(),
             'revenue'         => $vendor->bookings()->where('status', 'confirmed')->sum('total_price'),
         ];
 
-        return Inertia::render('Vendor/Dashboard', compact('vendor', 'bookings', 'stats'));
+        return Inertia::render('Vendor/Dashboard', compact('vendor', 'bookings', 'stat'));
     }
 }

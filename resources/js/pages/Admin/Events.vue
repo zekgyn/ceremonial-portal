@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Link, router } from '@inertiajs/vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { Link } from '@inertiajs/vue3'
+import { Card } from '@/components/ui/card';
 
 defineProps({ events: Array })
 
@@ -15,36 +15,35 @@ const typeEmoji = { wedding: '💍', funeral: '🕊', birthday: '🎂', corporat
 
 function deleteEvent(id) {
   if (confirm('Delete this event and all its bookings?')) {
-    router.delete(route('events.destroy', id))
+    // router.delete(route('events.destroy', id))
   }
 }
 </script>
 
 <template>
-  <AppLayout>
-    <div class="mb-8 flex items-start justify-between gap-4">
+
+    <main class="mb-8 flex flex-col items-start justify-between gap-4">
       <div>
         <h1 class="font-display text-4xl text-stone-900">My Events</h1>
         <p class="text-stone-500 mt-1">Manage your ceremonies and bookings.</p>
       </div>
-      <Link :href="route('events.create')" class="btn-primary shrink-0">+ New Event</Link>
-    </div>
 
-    <div v-if="!events.length" class="card p-16 text-center text-stone-400">
+
+    <Card v-if="!events.length" class="card p-16 text-center text-stone-400">
       <p class="font-display text-3xl mb-2">No events yet</p>
       <p class="text-sm mb-6">Plan your first ceremony in minutes.</p>
-      <Link :href="route('events.create')" class="btn-primary">Plan an Event →</Link>
-    </div>
+      <Link href="/" class="btn-primary">Plan an Event →</Link>
+    </Card>
 
     <div class="space-y-4">
-      <div v-for="event in events" :key="event.id"
+      <Card v-for="event in events" :key="event.id"
            class="card p-5 flex items-center gap-5">
         <div class="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-2xl shrink-0">
           {{ typeEmoji[event.type] ?? '✦' }}
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex items-start justify-between gap-2">
-            <Link :href="route('events.show', event.id)"
+            <Link href="route('events.show', event.id)"
                   class="font-display text-xl text-stone-900 hover:text-[#b5906b] transition-colors truncate">
               {{ event.title }}
             </Link>
@@ -58,8 +57,8 @@ function deleteEvent(id) {
           </div>
         </div>
         <div class="flex items-center gap-2 shrink-0">
-          <Link :href="route('events.edit', event.id)" class="btn-ghost text-xs">Edit</Link>
-          <Link :href="route('events.show', event.id)" class="btn-secondary text-xs">View →</Link>
+          <!-- <Link :href="route('events.edit', event.id)" class="btn-ghost text-xs">Edit</Link>
+          <Link :href="route('events.show', event.id)" class="btn-secondary text-xs">View →</Link> -->
           <button @click="deleteEvent(event.id)"
                   class="p-2 text-stone-300 hover:text-red-400 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,7 +67,7 @@ function deleteEvent(id) {
             </svg>
           </button>
         </div>
-      </div>
+      </Card>
     </div>
-  </AppLayout>
+    </main>
 </template>

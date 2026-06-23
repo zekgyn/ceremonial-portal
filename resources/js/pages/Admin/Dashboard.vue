@@ -24,17 +24,17 @@ const props = defineProps({
 const statistics = [
     {
         label: "Total Revenue",
-        value: `Tsh ${(props.stats.revenue / 1000).toFixed(1)}k`,
+        value: `Tsh ${(props.stats?.revenue / 1000).toFixed(1)}k`,
         sub: "+18% this month",
         icon: DollarSign,
         color: "from-amber-500 to-orange-500"
     },
     {
-        label: "Total Bookings", value: props.stats.bookings, sub: "+12% this month", icon:
+        label: "Total Bookings", value: props.stats?.bookings, sub: "+12% this month", icon:
             CheckCircle, color: "from-green-500 to-emerald-500"
     },
     {
-        label: "Active Vendors", value: props.stats.vendors, sub: `${props.stats.pending_vendors} pending`, icon:
+        label: "Active Vendors", value: props.stats?.vendors, sub: `${props.stats?.pending_vendors} pending`, icon:
             Users, color: "from-blue-500 to-cyan-500"
     },
     {

@@ -16,8 +16,8 @@ class DashboardController extends Controller
         // abort_unless(request()->user()->isAdmin(), 403);
 
         $stats = [
-            'users'    => User::query()->count('id'),
-            'vendors'  => Vendor::query()->count('id'),
+            // 'users'    => User::query()->count('id'),
+            'vendors'  => Vendor::query()->where('verified', true)->count('id'),
             'events'   => Event::query()->count('id'),
             'bookings' => Booking::query()->count('id'),
             'revenue'  => Booking::query()->where('status', 'confirmed')->sum('total_price'),

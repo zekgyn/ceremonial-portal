@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->decimal('price', 12, 2);
             $table->unsignedInteger('guest_limit')->nullable();
             $table->json('metadata')->nullable();
-            $table->foreignId('vendor_id')->constrained('vendors')->nullOnDelete();
+            $table->foreignId('vendor_id')->nullable()->constrained('vendors')->nullOnDelete();
             $table->timestampsTz();
         });
     }

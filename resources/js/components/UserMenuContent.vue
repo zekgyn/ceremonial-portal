@@ -33,16 +33,16 @@ defineProps<Props>();
     <DropdownMenuGroup>
         <DropdownMenuItem :as-child="true">
             <Link class="block w-full cursor-pointer" :href="edit()" prefetch>
-                <Settings class="mr-2 h-4 w-4" />
+                <Settings class="mr-2 size-4" />
                 Settings
             </Link>
         </DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
-    <DropdownMenuItem :as-child="true">
+    <DropdownMenuItem class="hover:bg-rose-600 bg-rose-500 text-white" :as-child="true">
         <Link class="block w-full cursor-pointer" :href="logout()" @click="handleLogout" as="button"
             data-test="logout-button">
-            <LogOut class="mr-2 h-4 w-4" />
+            <LogOut class="mr-2 size-4" />
             Log out
         </Link>
     </DropdownMenuItem>

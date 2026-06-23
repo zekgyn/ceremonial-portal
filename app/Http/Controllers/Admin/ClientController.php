@@ -12,8 +12,17 @@ class ClientController extends Controller
     {
         abort_unless(request()->user()->isAdmin(), 403);
 
-        $clients = User::query()->paginate(20);
+        $clients = User::query()->where('role', 'client')->paginate(20);
 
         return Inertia::render('Admin/Clients', compact('clients'));
+    }
+
+    public function show(User $user)
+    {
+        abort_unless(request()->user()->isAdmin(), 403);
+
+        $user->load('events');
+
+        return inertia('Admin/Client', ['user' => $user]);
     }
 }

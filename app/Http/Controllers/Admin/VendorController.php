@@ -24,7 +24,8 @@ class VendorController extends Controller
     {
         abort_unless(request()->user()->isAdmin(), 403);
 
-        $vendor->update(['verified' => !$vendor->verified]);
+        $vendor->verified = !$vendor->verified;
+        $vendor->save();
 
         return back()->with('success', 'Vendor verification status updated.');
     }

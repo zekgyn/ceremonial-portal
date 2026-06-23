@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', Admin\DashboardController::class)->name('dashboard');
         Route::get('/clients', [Admin\ClientController::class, 'index'])->name('clients.index');
+        Route::get('/clients/{user}', [Admin\ClientController::class, 'show'])->name('clients.show');
 
         // Route::name('events.')->group(function () {
             Route::resource('events', Admin\EventController::class);
